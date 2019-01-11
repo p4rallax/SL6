@@ -7,9 +7,8 @@ struct mtable
     char type[10];
     char mnemonic[10];
     char opcode[10];
-    int length;
-   
-}mt[16];
+    int length; 
+};
 
 typedef struct mtable mterm;
 
@@ -20,9 +19,6 @@ struct stable
 }st[10];
 
 typedef struct stable sterm;
-
-
-    
 
 int main()
 {
@@ -97,7 +93,7 @@ int main()
      mt[12].length=1;
      
      
-     strcpy(mt[13].mnemonic,"LTROG");
+     strcpy(mt[13].mnemonic,"LTORG");
      strcpy(mt[13].type,"AD");
      strcpy(mt[13].opcode,"4");
      mt[13].length=1;
@@ -116,7 +112,7 @@ int main()
     
     
     printf("\nMnemonic Type\tOpcode\tLength");
-    for(i=0;i<17;i++)
+    for(i=0;i<16;i++)
     {
          printf("\n\n%s\t %s\t%s\t %d\n",mt[i].mnemonic,mt[i].type,mt[i].opcode,mt[i].length);
     }
@@ -126,9 +122,9 @@ const char filename[] = "doc.txt";
     i = 0;
     char *words = NULL;
     char *word = NULL;
-    int c,flag;
+    int c,flag=99;
     int j,k;
-    char * allwords[50];
+    
     if ((fp = fopen(filename, "r")) == NULL)
     {
         /*Where doc txt is a normal file with plain text*/
@@ -143,6 +139,7 @@ const char filename[] = "doc.txt";
         words[i-1] = c;
     }   
     word = strtok(words, " ");
+    fclose(fp);
     while (word != NULL)
     {   
         printf("%s\n", word);
@@ -153,19 +150,18 @@ const char filename[] = "doc.txt";
     printf("\n");
 	
 	for (j=0; j<i; j++)
-    {
-    	for (k=0; k<5; k++)
     	{
-       		flag=strcmp(allwords[j],mt[k].mnemonic);
-       		if(flag == 0)
-       		{
-       			printf("%s\t%s\t%s\n",mt[k].type,mt[k].mnemonic,mt[k].opcode);
+    		for (k=0; k<16; k++)
+    		{
+       			flag=strcmp(&words[j],mt[k].mnemonic);
+       			if(flag == 0)
+       			{
+				
+       				printf("%s\t%s\t%s\n",mt[k].type,mt[k].mnemonic,mt[k].opcode);
+       			}
        		}
-       	}
 	}
-	
+
 	printf("\n");
-    return(0);
+    return 0;
 }
-
-
